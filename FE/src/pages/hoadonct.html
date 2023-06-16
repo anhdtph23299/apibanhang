@@ -1,0 +1,61 @@
+<div class="table-data">
+  <div class="order">
+    <div class="head">
+      <div class="row">
+        <div class="col-3">
+          <h4>Hoá Đơn</h4>
+        </div>
+        <div class="col-5"></div>
+        <div class="col-4">
+          <button
+            class="btn btn-outline-danger"
+            ng-if="trangThai==1"
+            ng-click="capNhatTrangThai($event,4)"
+          >
+            Huỷ đơn
+          </button>
+          <button
+            class="btn btn-outline-dark"
+            ng-if="trangThai==1"
+            ng-click="capNhatTrangThai($event,2)"
+          >
+            Nhận đơn
+          </button>
+          <button
+            class="btn btn-outline-success"
+            ng-if="trangThai==2"
+            ng-click="capNhatTrangThai($event,3)"
+          >
+            Hoàn thành
+          </button>
+        </div>
+      </div>
+      <i class="bx bx-search"></i>
+      <i class="bx bx-filter"></i>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Tên mặt hàng</th>
+          <th>Số lượng</th>
+          <th>Đơn giá</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="x in dsHoaDonChiTiet">
+          <td>
+            <img
+              ng-src="{{getImageUrl(x.images)}}"
+              height="50px"
+              width="50px"
+            />
+          </td>
+          <td>{{x.tenBanPhim}}</td>
+          <td>{{x.soLuong}}</td>
+          <td>{{x.donGia}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,196 @@
+<div class="container">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link active"
+        id="home-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#home"
+        type="button"
+        role="tab"
+        aria-controls="home"
+        aria-selected="true"
+      >
+        Thống kê sản phẩm bán chạy
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="profile-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#profile"
+        type="button"
+        role="tab"
+        aria-controls="profile"
+        aria-selected="false"
+      >
+        Thống kê sản phẩm tồn
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="contact-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#contact"
+        type="button"
+        role="tab"
+        aria-controls="contact"
+        aria-selected="false"
+      >
+        Contact
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div
+      class="tab-pane fade show active mt-4"
+      id="home"
+      role="tabpanel"
+      aria-labelledby="home-tab"
+    >
+      <!-- Tab 1 -->
+      <div class="row">
+        <div class="col-5">
+          <button
+            type="button"
+            class="btn btn-outline-info"
+            ng-click="thongKeTatCa()"
+          >
+            Thống kê tất cả
+          </button>
+        </div>
+        <div class="col-3">
+          <div class="row">
+            <div class="col-8">
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                ng-model="ngayCanTim"
+              >
+                <option value="" selected>Chọn ngày</option>
+                <option ng-repeat="x in ngay" value="{{x}}">{{x}}</option>
+              </select>
+            </div>
+            <div class="col-4">
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                ng-click="loc($event,0)"
+              >
+                Tìm
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            ng-click="loc($event,1)"
+          >
+            Tuần hiện tại
+          </button>
+        </div>
+        <div class="col-2">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            ng-click="loc($event,2)"
+          >
+            Tháng hiện tại
+          </button>
+        </div>
+      </div>
+      <canvas id="myChart"></canvas>
+      <!-- end tab 1 -->
+    </div>
+    <div
+      class="tab-pane fade mt-4"
+      id="profile"
+      role="tabpanel"
+      aria-labelledby="profile-tab"
+    >
+      <div class="row">
+        <div class="col-5">
+          <button
+            type="button"
+            class="btn btn-outline-info"
+            ng-click="thongKeTon()"
+          >
+            Thống kê tất cả
+          </button>
+        </div>
+        <div class="col-3">
+          <div class="row">
+            <div class="col-8">
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                ng-model="ngayCanTim"
+              >
+                <option value="" selected>Chọn ngày</option>
+                <option ng-repeat="x in ngay" value="{{x}}">{{x}}</option>
+              </select>
+            </div>
+            <div class="col-4">
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                ng-click="locThongKeTon($event,0)"
+              >
+                Tìm
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            ng-click="locThongKeTon($event,1)"
+          >
+            Tuần hiện tại
+          </button>
+        </div>
+        <div class="col-2">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            ng-click="locThongKeTon($event,2)"
+          >
+            Tháng hiện tại
+          </button>
+        </div>
+      </div>
+      <!--  -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Số lượng tồn</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="x in dsSanPhamTon">
+            <th scope="row">{{$index+1}}</th>
+            <td>{{x.tenBanPhim}}</td>
+            <td>{{x.soLuong}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="tab-pane fade mt-4"
+      id="contact"
+      role="tabpanel"
+      aria-labelledby="contact-tab"
+    >
+      ...
+    </div>
+
+    <!--  -->
+  </div>
+</div>

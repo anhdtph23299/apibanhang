@@ -1,0 +1,82 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="main-img dt">
+        <img class="img-fluid" ng-src="{{getImageUrl(spDetail.images)}}" />
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="main-description px-2">
+        <h3>Loại bàn phím : {{spDetail.loaiBanPhim.tenLoai}}</h3>
+        <div class="product-title text-bold my-3">{{spDetail.tenBanPhim}}</div>
+        <div class="row mb-4">
+          <div class="col-3"><p>Đèn nền:</p></div>
+          <div class="col-6">
+            <h5>{{spDetail.denNen==true?"Có":"Không"}}</h5>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-3"><p>Hãng :</p></div>
+          <div class="col-6">
+            <h5>{{spDetail.hang.tenHang}}</h5>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-3"><p>Kiểu kết nối :</p></div>
+          <div class="col-6">
+            <h5>{{spDetail.kieuKetNoi.tenKieu}}</h5>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-3"><p>Giá tiền :</p></div>
+          <div class="col-6">
+            <strong>{{spDetail.donGia}}</strong>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-3"><p>Số lượng hiện tại :</p></div>
+          <div class="col-6">
+            <h5>{{spDetail.soLuong}}</h5>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-3">
+            <span id="basic-addon1">Số lượng</span>
+          </div>
+
+          <div class="col-5">
+            <input
+              type="number"
+              class="form-control"
+              aria-describedby="basic-addon1"
+              ng-model="soLuongMua"
+              value="1"
+              min="1"
+              max="{{spDetail.soLuong}}"
+            />
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-2"></div>
+          <div class="col-3">
+            <button type="button" class="btn btn-dark">Mua ngay</button>
+          </div>
+          <div class="col-5">
+            <button
+              type="button"
+              class="btn btn-dark"
+              ng-click="themVaoGio($event,spDetail.id)"
+            >
+              Thêm vào giỏ hàng
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <p>Mô tả :</p>
+          <p>{{spDetail.mota}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

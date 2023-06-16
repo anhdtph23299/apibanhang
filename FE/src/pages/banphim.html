@@ -1,0 +1,370 @@
+<section>
+  <h1 class="text-center text-danger mb-3">Thông tin sản phẩm</h1>
+  <form>
+    <div class="row mb-4">
+      <div class="col-2"></div>
+      <div class="col-2"><p>Tên bàn phím</p></div>
+      <div class="col-4">
+        <input
+          type="text"
+          class="form-control"
+          ng-model="banPhim.tenBanPhim"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+    </div>
+    <!-- -->
+    <div class="row mb-4">
+      <div class="col-2"></div>
+      <div class="col-2"><p>Giá tiền</p></div>
+      <div class="col-4">
+        <input
+          type="number"
+          class="form-control"
+          ng-model="banPhim.donGia"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+    </div>
+    <!-- -->
+    <div class="row mb-4">
+      <div class="col-2"></div>
+      <div class="col-2"><p>Số lượng</p></div>
+      <div class="col-4">
+        <input
+          type="number"
+          min="0"
+          ng-model="banPhim.soLuong"
+          class="form-control"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+    </div>
+    <!-- -->
+    <div class="row mb-4">
+      <div class="col-2"></div>
+      <div class="col-2"><p>Đèn nền</p></div>
+      <div class="col-4">
+        <input
+          type="radio"
+          name="denNen"
+          ng-value="true"
+          ng-model="banPhim.denNen"
+          ng-checked="banPhim.denNen==true"
+        />Có
+        <input
+          type="radio"
+          name="denNen"
+          ng-value="false"
+          ng-model="banPhim.denNen"
+          ng-checked="banPhim.denNen==false"
+        />Không
+      </div>
+    </div>
+    <!-- -->
+    <div class="row mb-4">
+      <div class="col-2"></div>
+      <div class="col-2"><p>Hãng</p></div>
+      <div class="col-4">
+        <select
+          aria-label="Default select example"
+          class="form-select"
+          ng-model="banPhim.hang"
+        >
+          <option
+            ng-repeat="x in listHang"
+            ng-value="x"
+            ng-selected="x.id==banPhim.hang.id"
+          >
+            {{x.tenHang}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <!-- -->
+    <div class="row mb-4">
+      <div class="col-2"></div>
+      <div class="col-2"><p>Kiểu kết nối</p></div>
+      <div class="col-4">
+        <select
+          name="kieuKetNoi"
+          ng-model="banPhim.kieuKetNoi"
+          aria-label="Default select example"
+          class="form-select"
+        >
+          <option
+            ng-repeat="x in listKieu"
+            ng-value="x"
+            ng-selected="x.id ==banPhim.kieuKetNoi.id"
+          >
+            {{x.tenKieu}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- -->
+    <div class="row mb-4">
+      <div class="col-2"></div>
+      <div class="col-2"><p>Loại Bàn phím</p></div>
+      <div class="col-4">
+        <select
+          name="loaiBanPhim"
+          aria-label="Default select example"
+          class="form-select"
+          ng-model="banPhim.loaiBanPhim"
+        >
+          <option
+            ng-repeat="x in listLoai"
+            ng-value="x"
+            ng-selected="x.id ==banPhim.loaiBanPhim.id"
+          >
+            {{x.tenLoai}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- -->
+    <div class="row mb-4">
+      <div class="col-2"></div>
+      <div class="col-2"><p>Ảnh</p></div>
+      <div class="col-4">
+        <div class="mb-3">
+          <label for="formFile" class="form-label"
+            >Nên lựa chọn các ảnh đẹp , bắt mắt</label
+          >
+          <input
+            class="form-control"
+            type="file"
+            accept="image/*"
+            id="formFile"
+            multiple
+            onchange="angular.element(this).scope().setSelectedFile(this)"
+          />
+        </div>
+      </div>
+    </div>
+    <!-- -->
+    <div class="row mb-4">
+      <div class="col-2"></div>
+      <div class="col-2"><p>Mô tả</p></div>
+      <div class="col-7">
+        <div class="form-floating">
+          <textarea
+            ng-model="banPhim.mota"
+            class="form-control"
+            placeholder="Leave a comment here"
+            id="floatingTextarea"
+            style="height: 100px"
+          >
+          </textarea>
+          <label for="floatingTextarea"
+            >Mô tả ý nghĩa để có nhiều khách hàng hơn</label
+          >
+        </div>
+      </div>
+    </div>
+    <div class="mt-3 text-center mb-3">
+      <button
+        type="button"
+        class="btn btn-outline-info me-5"
+        style="width: 100px"
+        ng-click="addBanPhim($event)"
+      >
+        Thêm
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-info me-5"
+        style="width: 100px"
+        ng-click="updateBanPhim($event)"
+      >
+        Sửa
+      </button>
+    </div>
+  </form>
+</section>
+
+<section>
+  <form>
+    <div class="row mb-4 mt-5">
+      <div class="col-1"><h5>Tìm kiếm</h5></div>
+      <div class="col-2">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nhập tên"
+          ng-model="find.tenBanPhim"
+        />
+      </div>
+      <div class="col-3">
+        <input
+          placeholder="Nhập khoảng giá min"
+          class="form-control"
+          ng-model="find.min"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+      <div class="col-3">
+        <input
+          placeholder="Nhập khoảng giá max"
+          class="form-control"
+          ng-model="find.max"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+      <div class="col-3">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          ng-model="find.denNen"
+        >
+          <option value="" selected>Chọn đèn nền</option>
+          <option value="true">Có</option>
+          <option value="false">Không</option>
+        </select>
+      </div>
+      <div class="col-3 mt-3">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          ng-model="find.hang"
+        >
+          <option value="" selected>Chọn hãng</option>
+          <option ng-repeat="x in listHang" ng-value="x.tenHang">
+            {{x.tenHang}}
+          </option>
+        </select>
+      </div>
+      <div class="col-3 mt-3">
+        <select
+          class="form-select"
+          ng-model="find.kieuKetNoi"
+          aria-label="Default select example"
+        >
+          <option value="" selected>Chọn kiểu kết nối</option>
+          <option ng-repeat="x in listKieu" ng-value="x.tenKieu">
+            {{x.tenKieu}}
+          </option>
+        </select>
+      </div>
+      <div class="col-3 mt-3">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          ng-model="find.loaiBanPhim"
+        >
+          <option value="" selected>Chọn loại bàn phím</option>
+          <option ng-repeat="x in listLoai" ng-value="x.tenLoai">
+            {{x.tenLoai}}
+          </option>
+        </select>
+      </div>
+      <div class="col-2">
+        <button
+          type="button"
+          ng-click="findThuocTinh($event,1)"
+          class="btn btn-success mt-3"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </form>
+</section>
+
+<section>
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Tên sản phẩm</th>
+          <th scope="col">Ảnh</th>
+          <th scope="col">Số lượng</th>
+          <th scope="col">Giá tiền</th>
+          <th scope="col">Đèn nền</th>
+          <th scope="col">Hãng</th>
+          <th scope="col">Kiểu bàn phím</th>
+          <th scope="col">Loại</th>
+          <th scope="col-2">Funtion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="x in listBanPhim.content">
+          <th scope="row">{{x.tenBanPhim}}</th>
+          <th scope="row">
+            <img
+              ng-src="{{getImageUrl(x.images)}}"
+              height="50px"
+              width="50px"
+            />
+          </th>
+          <td>{{x.soLuong}}</td>
+          <td>{{x.donGia1}}</td>
+          <td>{{x.denNen==false?"Không":"Có"}}</td>
+          <td>{{x.hang.tenHang}}</td>
+          <td>{{x.kieuKetNoi.tenKieu}}</td>
+          <td>{{x.loaiBanPhim.tenLoai}}</td>
+          <td>
+            <button
+              href="/banphim/detail/{{x.id}}"
+              class="btn btn-outline-primary me-2"
+              ng-click="detailBanPhim($event,$index)"
+            >
+              Detail
+            </button>
+            <button
+              ng-click="deleteBanPhim($event,$index)"
+              class="btn btn-outline-primary me-2 mt-2"
+              onclick="return confirm('Bạn có muốn xoá không?');"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<!--  -->
+<section class="d-flex justify-content-center mt-5">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item" ng-if="listBanPhim.number+1>1">
+        <button
+          type="button"
+          class="page-link"
+          ng-click="phanTrang($event,listBanPhim.number-1)"
+          aria-label="Previous"
+        >
+          <span aria-hidden="true">&laquo;</span>
+        </button>
+      </li>
+      <li
+        ng-repeat="page in range()"
+        ng-class="{ 'page-item active': listBanPhim.number == $index, 'page-item': listBanPhim.number != $index }"
+      >
+        <button
+          type="button"
+          class="page-link"
+          ng-click="phanTrang($event,$index)"
+        >
+          {{ $index + 1 }}
+        </button>
+      </li>
+      <button
+        type="button"
+        class="page-link"
+        ng-if="listBanPhim.number+1 < listBanPhim.totalPages"
+        ng-click="phanTrang($event,listBanPhim.number+1)"
+        aria-label="Next"
+      >
+        <span aria-hidden="true">&raquo;</span>
+      </button>
+    </ul>
+  </nav>
+  <button type="button" class="page-link" ng-click="xoaTimKiem($event)">
+    Xoá tìm kiếm
+  </button>
+</section>
