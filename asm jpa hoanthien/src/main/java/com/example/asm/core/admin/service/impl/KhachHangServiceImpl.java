@@ -33,4 +33,9 @@ public class KhachHangServiceImpl implements KhachHangService {
     public KhachHang dangNhapTaiKhoan(String taiKhoan, String passwork) {
         return khachHangRepository.findKhachHangByEmailAndMatKhau(taiKhoan,passwork);
     }
+
+    @Override
+    public KhachHang getUserName(String username) {
+        return khachHangRepository.findKhachHangByEmail(username);
+    }
 }

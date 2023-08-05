@@ -1,0 +1,41 @@
+<div class="table-data">
+    <div class="order">
+      <div class="head">
+        <h3>Hoá Đơn</h3>
+        <i class="bx bx-search"></i>
+        <i class="bx bx-filter"></i>
+      </div>
+  
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Mã đơn hàng</th>
+            <th>Tên người nhận</th>
+            <th>Ngày đặt</th>
+            <th>Ngày thanh toán</th>
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Tình trạng</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="x in dsHoaDon">
+            <td>{{x.id}}</td>
+            <td>{{x.tenNguoiNhan}}</td>
+            <th>{{x.ngayTao}}</th>
+            <th>{{x.ngayThanhToan}}</th>
+            <th>{{x.sdt}}</th>
+            <td>{{x.diaChi}}</td>
+            <td>{{x.tinhTrang}}</td>
+            <td>
+              <a href="#hoadon/{{x.id}}" class="btn btn-outline-secondary"
+                >Chi tiết</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

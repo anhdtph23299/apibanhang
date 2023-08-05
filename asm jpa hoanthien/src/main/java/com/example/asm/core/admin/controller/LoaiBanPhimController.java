@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 @RestController
 @RequestMapping("/loaibanphim")
-@CrossOrigin(origins = {"*"}, maxAge = 4800, allowCredentials = "false")
 public class LoaiBanPhimController {
     @Autowired
     private LoaiBanPhimService hangService;

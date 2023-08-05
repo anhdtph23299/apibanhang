@@ -33,13 +33,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/banphim")
-@CrossOrigin(origins = {"*"}, maxAge = 4800, allowCredentials = "false")
 public class BanPhimController {
     @Autowired
     private BanPhimService banPhimService;
 
-    @Autowired
-    private ResourceLoader resourceLoader;
 
     @GetMapping()
     public Page<BanPhim> viewAll(
@@ -85,7 +82,13 @@ public class BanPhimController {
 //                         @RequestParam("anh") MultipartFile anh
     ) throws IOException {
         banPhim.setId(id);
-        banPhim.setImages(file.getBytes());
+        if (file.getBytes()==null){
+            BanPhim bp = banPhimService.findByMaSanPham(id);
+            banPhim.setImages(bp.getImages());
+        }else{
+            banPhim.setImages(file.getBytes());
+
+        }
         return ResponseEntity.ok(banPhimService.saveOrUpdate(banPhim));
     }
 
@@ -99,7 +102,6 @@ public class BanPhimController {
     @GetMapping("/detail/{id}")
     public BanPhim detail(@PathVariable(value = "id") Long id) {
         BanPhim banPhim = banPhimService.findByMaSanPham(id);
-//        model.addAttribute("banPhim",banPhim);
         return banPhim;
     }
 

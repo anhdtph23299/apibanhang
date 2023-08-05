@@ -9,6 +9,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
     />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
     <script src="../js/bootstrap.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -24,13 +28,26 @@
     <title>Document</title>
   </head>
   <body>
-    <header ng-include="'./layout/header.html'"></header>
+    <header ng-if="login">
+      <div
+        ng-if="role === 'admin'"
+        ng-include="'./layout/headeradmin.html'"
+      ></div>
+      <div ng-if="role === 'client'" ng-include="'./layout/header.html'"></div>
+    </header>
 
     <!-- Main -->
     <main ng-view class="container"></main>
 
     <!--  -->
-    <footer ng-include="'./layout/footer.html'"></footer>
+    <footer ng-if="login">
+      <div
+        ng-if="role === 'admin'"
+        ng-include="'./layout/footeradmin.html'"
+      ></div>
+      <div ng-if="role === 'client'" ng-include="'./layout/footer.html'"></div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../lib/angular.js"></script>
     <script src="../lib/angular-route.js"></script>
@@ -41,6 +58,7 @@
     <script src="controller/detailproductController.js"></script>
     <script src="controller/thongke.js"></script>
     <script src="controller/hoadonController.js"></script>
+    <script src="controller/adminController.js"></script>
     <script src="route.js"></script>
   </body>
 </html>

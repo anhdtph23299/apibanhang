@@ -1,6 +1,11 @@
-package com.springjwt.configuration;
+package com.example.asm.jwtsecurity.configuration;
 
-import jakarta.servlet.*;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,8 +21,8 @@ import java.util.Map;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class SimpleCorsFilter implements Filter {
 
-    @Value("${app.client.url}")
-    private String clientAppUrl = "";
+//    @Value("${app.client.url}")
+//    private String clientAppUrl = "";
 
     public SimpleCorsFilter() {
     }

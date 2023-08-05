@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/khachhang")
-@CrossOrigin(origins = {"*"}, maxAge = 4800, allowCredentials = "false")
 public class KhachHangController {
 
     @Autowired
@@ -28,7 +27,7 @@ public class KhachHangController {
     public KhachHang dangNhapTaiKhoan(@RequestBody DangNhapTaiKhoanRequest taiKhoan){
         System.out.println(taiKhoan);
         KhachHang khachHang = khachHangService.dangNhapTaiKhoan(taiKhoan.getEmail(),taiKhoan.getPassword());
-        System.out.println(khachHangService);
+        System.out.println("trick test"+khachHang);
         return khachHang;
     }
 }

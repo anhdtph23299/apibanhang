@@ -1,13 +1,26 @@
 window.ChartController = function ($scope, $rootScope, $http, $location) {
-    $http.get(gioHangChiTietAPI + "/" + $rootScope.khachHang.id).then(function (response) {
-        $scope.dsGioHang = response.data;
-    })
-    $scope.tongTien = function () {
-        $http.get(gioHangChiTietAPI + "/tongtien/" + $rootScope.khachHang.id).then(function (response) {
-            $scope.tongTien = response.data;
-        })
+
+
+    if ($rootScope.khachHang == null && $rootScope.token == null) {
+        //  alert("Bạn phải đăng nhập mới được vào giỏ hàng")
+        $location.path($rootScope.role == "admin" ? "dangnhapadmin" : "/dangnhap")
     }
-    $scope.tongTien();
+
+    if ($rootScope.khachHang != null) {
+        $http.get(gioHangChiTietAPI + "/" + $rootScope.khachHang.id).then(function (response) {
+            $scope.dsGioHang = response.data;
+        })
+        $http.get(gioHangChiTietAPI + "/tongtien/" + $rootScope.khachHang.id)
+            .then(function (response) {
+                $scope.tongTien = response.data;
+            })
+            .catch(function (error) {
+                console.error("Error occurred:", error);
+                $scope.tongTien = 0;
+            });
+    } else {
+        $rootScope.role = "admin"
+    }
 
     var url = $location.absUrl().split("/");
     $scope.daMuaTatCa = function (event) {
@@ -42,6 +55,7 @@ window.ChartController = function ($scope, $rootScope, $http, $location) {
 
     $scope.thongKeTon = function () {
         $http.get(gioHangChiTietAPI + "/topsanphamton").then(function (response) {
+            console.log(response);
             $scope.dsSanPhamTon = response.data;
         })
     }
@@ -170,7 +184,6 @@ window.ChartController = function ($scope, $rootScope, $http, $location) {
     }
     // 
     $scope.thongKeTheoThoiGian = function (url) {
-        console.log(url);
         // Hủy biểu đồ hiện tại nếu đã tồn tại
         if ($scope.myChart) {
             $scope.myChart.destroy();

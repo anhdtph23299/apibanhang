@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/hang")
-@CrossOrigin(origins = {"*"}, maxAge = 4800, allowCredentials = "false")
 public class HangController {
     @Autowired
     private HangService hangService;
@@ -21,4 +20,5 @@ public class HangController {
     public List<AdminHangResponse> getAll(){
         return hangService.getAll();
     }
+
 }

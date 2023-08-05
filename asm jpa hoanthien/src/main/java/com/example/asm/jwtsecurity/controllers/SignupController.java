@@ -1,8 +1,8 @@
-package com.springjwt.controllers;
+package com.example.asm.jwtsecurity.controllers;
 
-import com.springjwt.dto.SignupDTO;
-import com.springjwt.dto.UserDTO;
-import com.springjwt.services.auth.AuthService;
+import com.example.asm.jwtsecurity.dto.SignupDTO;
+import com.example.asm.jwtsecurity.dto.UserDTO;
+import com.example.asm.jwtsecurity.services.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class SignupController {
     public ResponseEntity<?> signupUser(@RequestBody SignupDTO signupDTO) {
        UserDTO createdUser = authService.createUser(signupDTO);
        if (createdUser == null){
-           return new ResponseEntity<>("User not created, come again later!", HttpStatus.BAD_REQUEST);
+           return new ResponseEntity<>("User1 not created, come again later!", HttpStatus.BAD_REQUEST);
        }
        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }

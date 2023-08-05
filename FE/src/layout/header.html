@@ -27,7 +27,7 @@
             <a class="dropdown-item" href="#doimatkhau">Đổi mật khẩu</a>
           </li>
           <li ng-if="khachHang!=null">
-            <a class="dropdown-item" href="#" ng-click="dangXuat">Đăng xuất</a>
+            <a class="dropdown-item" ng-click="dangXuat($event)">Đăng xuất</a>
           </li>
         </ul>
       </div>
@@ -47,8 +47,8 @@
         style="width: 200px; height: 100px"
       />
       <a class="navbar-brand" href="#trangchu">Trang chủ</a>
-      <a class="navbar-brand" href="#hoadon">Hoá đơn</a>
-      <a class="navbar-brand" href="#thongke">Thống kê</a>
+      <!-- <a class="navbar-brand" href="#hoadon">Hoá đơn</a> -->
+      <!-- <a class="navbar-brand" href="#thongke">Thống kê</a> -->
       <a class="navbar-brand" href="#damua">Sản phẩm đã mua</a>
     </div>
   </nav>

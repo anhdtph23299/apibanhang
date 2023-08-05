@@ -5,6 +5,12 @@ app.config(function ($routeProvider, $locationProvider) {
     .when("/banphim", {
       templateUrl: "./pages/banphim.html",
       controller: banPhimController,
+    }).when("/dangnhapadmin", {
+      templateUrl: "./pages/loginadmin.html",
+      controller: AdminController,
+    }).when("/trangchuadmin", {
+      templateUrl: "./pages/admin.html",
+      controller: hoaDonController,
     }).when("/sanpham", {
       templateUrl: "./pages/sanpham.html",
       controller: banPhimController,
@@ -49,7 +55,7 @@ app.config(function ($routeProvider, $locationProvider) {
       controller: hoaDonController,
     })
     .otherwise({
-      redirectTo: "/",
+      redirectTo: "/trangchuadmin",
     });
 });
 app.controller("gioHangController", function ($scope, $rootScope, $http) {
@@ -66,8 +72,17 @@ app.controller("gioHangController", function ($scope, $rootScope, $http) {
   //   $scope.soLuongGiohang = 0;
   // }
 })
-app.run(function ($rootScope, $http) {
+app.run(function ($rootScope, $http, $location) {
+  $rootScope.login = true;
+  $rootScope.role = "client";
   $rootScope.khachHang = null;
+  $rootScope.token = "";
+  $rootScope.dangXuat = function (event) {
+    event.preventDefault();
+    $rootScope.khachHang = null;
+    alert("Đăng xuất thành công")
+    $location.path("/");
+  }
   // $rootScope.setLaiGioHang = function () {
   //   $http.get(gioHangAPI + "/soluonggiohang/" + $rootScope.khachHang.id).then(function (response) {
   //     $rootScope.soLuongGiohang = response.data;

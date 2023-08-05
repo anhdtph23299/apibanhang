@@ -1,15 +1,16 @@
-package com.springjwt.controllers;
+package com.example.asm.jwtsecurity.controllers;
 
-import com.springjwt.dto.AuthenticationDTO;
-import com.springjwt.dto.AuthenticationResponse;
-import com.springjwt.services.jwt.UserDetailsServiceImpl;
-import com.springjwt.util.JwtUtil;
+import com.example.asm.jwtsecurity.dto.AuthenticationDTO;
+import com.example.asm.jwtsecurity.dto.AuthenticationResponse;
+import com.example.asm.jwtsecurity.services.jwt.UserDetailsServiceImpl;
+import com.example.asm.jwtsecurity.util.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class AuthenticationController {
@@ -42,8 +46,14 @@ public class AuthenticationController {
         }
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationDTO.getEmail());
+        System.out.println(userDetails.getAuthorities());
 
-        final String jwt = jwtUtil.generateToken(userDetails.getUsername());
+        List<SimpleGrantedAuthority> authorities = userDetails.getAuthorities().stream()
+                .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
+                .collect(Collectors.toList());
+
+
+        String jwt = jwtUtil.generateToken(userDetails.getUsername(), authorities);
 
         return new AuthenticationResponse(jwt);
 

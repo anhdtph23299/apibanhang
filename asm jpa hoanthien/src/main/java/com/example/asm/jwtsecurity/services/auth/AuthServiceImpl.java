@@ -1,9 +1,9 @@
-package com.springjwt.services.auth;
+package com.example.asm.jwtsecurity.services.auth;
 
-import com.springjwt.dto.SignupDTO;
-import com.springjwt.dto.UserDTO;
-import com.springjwt.entities.User;
-import com.springjwt.repositories.UserRepository;
+import com.example.asm.jwtsecurity.dto.SignupDTO;
+import com.example.asm.jwtsecurity.dto.UserDTO;
+import com.example.asm.jwtsecurity.entities.User;
+import com.example.asm.jwtsecurity.repositories.UserRepository1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository1 userRepository;
 
     @Override
     public UserDTO createUser(SignupDTO signupDTO) {

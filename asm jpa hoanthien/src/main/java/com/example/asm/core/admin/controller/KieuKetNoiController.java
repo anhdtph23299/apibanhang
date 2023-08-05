@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 @RestController
 @RequestMapping("/kieuketnoi")
-@CrossOrigin(origins = {"*"}, maxAge = 4800, allowCredentials = "false")
 public class KieuKetNoiController{
     @Autowired
     private KieuKetNoiService kieuKetNoiService;

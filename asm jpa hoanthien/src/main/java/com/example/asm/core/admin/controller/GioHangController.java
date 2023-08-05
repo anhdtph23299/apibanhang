@@ -5,6 +5,7 @@ import com.example.asm.core.admin.repository.AdminGioHangRepository;
 import com.example.asm.core.admin.service.GioHangService;
 import com.example.asm.entity.GioHang;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/giohang")
-@CrossOrigin(origins = {"*"}, maxAge = 4800, allowCredentials = "false")
 public class GioHangController {
 
     @Autowired
@@ -41,7 +41,6 @@ public class GioHangController {
         gioHang.setNgayTao(new java.sql.Date(new Date().getTime()));
         return adminGioHangRepository.save(gioHang);
     }
-
     @GetMapping("/giohangdangcho")
     public List<AdminHoaDonResponse> viewHoaDon() {
         return gioHangService.toanBoGioHang();
@@ -51,7 +50,6 @@ public class GioHangController {
     public Integer tinhTrangHoaDon(@PathVariable("idhoadon") Long idHoaDon) {
         return gioHangService.tinhTrangHoaDon(idHoaDon);
     }
-
     @GetMapping("/capnhattrangthai/{idhoadon}/{trangthai}")
     public GioHang capNhatTrangThai(@PathVariable("idhoadon") Long idHoaDon, @PathVariable("trangthai") Integer trangThai) {
         return gioHangService.capNhatTrangThai(idHoaDon,trangThai);

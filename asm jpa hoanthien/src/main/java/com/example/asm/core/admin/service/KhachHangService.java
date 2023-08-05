@@ -9,4 +9,6 @@ public interface KhachHangService {
     Boolean isNotEmail(String email);
 
     KhachHang dangNhapTaiKhoan(String taiKhoan,String passwork);
+
+    KhachHang getUserName(String username);
 }

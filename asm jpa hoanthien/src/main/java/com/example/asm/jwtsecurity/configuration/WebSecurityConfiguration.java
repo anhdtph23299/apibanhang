@@ -1,6 +1,6 @@
-package com.springjwt.configuration;
+package com.example.asm.jwtsecurity.configuration;
 
-import com.springjwt.filters.JwtRequestFilter;
+import com.example.asm.jwtsecurity.filters.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,20 +23,35 @@ public class WebSecurityConfiguration {
     @Autowired
     private JwtRequestFilter requestFilter;
 
+    //    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http.csrf().disable()
+//                .authorizeHttpRequests()
+//                .requestMatchers("/authenticate", "/sign-up").permitAll()
+//                .and()
+//                .authorizeHttpRequests().requestMatchers("/api/**","/banphim")
+//                .authenticated().and()
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class)
+//                .build();
+//    }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/authenticate", "/sign-up").permitAll()
+                .requestMatchers("/authenticate", "/sign-up", "/khachhang/dangnhap"
+                        , "/loaibanphim/**", "/banphim/**", "/kieuketnoi/**","/hang/**","/giohangchitiet/**").permitAll()
+                .requestMatchers("/giohang/**").hasAuthority("ADMIN")
                 .and()
-                .authorizeHttpRequests().requestMatchers("/api/**")
-                .authenticated().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

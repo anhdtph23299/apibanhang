@@ -1,6 +1,6 @@
-package com.springjwt.controllers;
+package com.example.asm.jwtsecurity.controllers;
 
-import com.springjwt.dto.HelloResponse;
+import com.example.asm.jwtsecurity.dto.HelloResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

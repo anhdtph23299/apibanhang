@@ -1,7 +1,9 @@
 window.loginController = function ($scope, $http, $location, $rootScope) {
+
   // $http.get(nguoiDungAPI).then(function (response) {
   //   $scope.nguoiDung = response.data;
   // });
+  $rootScope.role = "client";
   $scope.daGuiMail = false;
   $scope.user = {
     email: "",
@@ -109,9 +111,11 @@ window.loginController = function ($scope, $http, $location, $rootScope) {
       if (response.data == "") {
         alert("sai tài khoản hoặc mật khẩu")
       } else {
+        $rootScope.role = "client";
         alert("đăng nhập thành công")
         $rootScope.khachHang = response.data;
         // $rootScope.setLaiGioHang()
+        $rootScope.role = "client";
         $location.path("/trangchu")
       }
     });

@@ -8,6 +8,7 @@ import com.example.asm.core.admin.repository.AdminGioHangChiTietRepository;
 import com.example.asm.core.admin.service.GioHangChiTietService;
 import com.example.asm.entity.GioHangChiTiet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,6 @@ import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/giohangchitiet")
-@CrossOrigin(origins = {"*"}, maxAge = 4800, allowCredentials = "false")
 public class GioHangChiTietController {
     @Autowired
     private GioHangChiTietService gioHangChiTietService;
@@ -84,12 +84,10 @@ public class GioHangChiTietController {
             @RequestParam(value = "thang",required = false)Integer thang){
         return gioHangChiTietService.dsBanPhimBanChayTheoThoiGian(ngay,tuan,thang);
     }
-
     @GetMapping("/topsanphamton")
     public List<AdminThongKeBanPhimTonResponse> viewThongKeTon(){
         return gioHangChiTietService.dsBanPhimTon();
     }
-
     @GetMapping("/topspton")
     public List<AdminThongKeBanPhimTonResponse> viewThongKeSpTonTheoThoiGian(
             @RequestParam(value = "ngay",required = false)Integer ngay,
